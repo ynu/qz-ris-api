@@ -1,0 +1,29 @@
+{
+  "name": "qz-ris-api",
+  "version": "1.0.0",
+  "description": "齐治堡垒机Restful API",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ynu/qz-ris-api.git"
+  },
+  "author": "ITC of YNU",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ynu/qz-ris-api/issues"
+  },
+  "homepage": "https://github.com/ynu/qz-ris-api#readme",
+  "dependencies": {
+    "axios": "^1.1.3",
+    "debug": "^4.3.4",
+    "memory-cache": "^0.2.0",
+    "node-fetch": "^3.2.10"
+  },
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "mocha": "^10.1.0"
+  }
+}
