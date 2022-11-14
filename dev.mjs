@@ -18,7 +18,6 @@ export const getByIP = async (ip, options = {}) => {
 
   const res = await ax.get(`${host}/shterm/api/dev?ipIs=${ip}`, {
     headers: {
-      // 'Content-Type': 'application/json;charset=utf-8',
       'st-auth-token': token,
     },
   });
