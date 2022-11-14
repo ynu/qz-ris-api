@@ -2,7 +2,7 @@
   "name": "qz-ris-api",
   "version": "1.0.0",
   "description": "齐治堡垒机Restful API",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "test": "mocha ./test"
   },
@@ -19,12 +19,9 @@
   "dependencies": {
     "axios": "^1.0.0",
     "debug": "^4.3.4",
-    "memory-cache": "^0.2.0",
-    "node-fetch": "^2.6.6",
-    "ynu-libs": "^4.13.3"
+    "memory-cache": "^0.2.0"
   },
   "devDependencies": {
-    "assert": "^1.1.1",
-    "mocha": "^8.0.0"
+    "assert": "^1.1.1"
   }
 }
