@@ -4,7 +4,7 @@ import { authenticate } from './auth.mjs';
 const warn = Debug('ynu-libs:ris-auth:warn');
 const error = Debug('ynu-libs:ris-auth:error');
 const info = Debug('ynu-libs:ris-auth:info');
-
+const debug = Debug('ynu-libs:ris-auth:debug');
 
 const { RIS_HOST } = process.env;
 
@@ -76,6 +76,38 @@ export const disableByLoginName = async (loginName, options = {}) => {
   return res.data;
 }
 
+/**
+ * 获取符合条件的用户列表
+ * @param {Object} params 过滤参数
+ *    - page
+ *    - size
+ *    - sort
+ * @param {Object} options 
+ */
+export const list = async (params = {}, options = {}) => {
+  const token = await authenticate(options);
+  const host = RIS_HOST || options.host;
+
+  // 生成查询字符串
+  const qs = Object.keys(params).map(k => {
+    const v = params[k];
+    switch (k) {
+      case 'authType':
+        return `${k}.idIn=${v.join(',')}`;
+      default:
+        return `${k}=${v}`
+    }
+  }).join('&');
+  debug(`生成的查询字符串是:${qs}`)
+
+  const res = await ax.get(`${host}/shterm/api/user?${qs}`, {
+    headers: {
+      'st-auth-token': token,
+    },
+  });
+  return res.data;
+}
+
 
   
   export default {
@@ -83,5 +115,6 @@ export const disableByLoginName = async (loginName, options = {}) => {
     getByLoginName,
     create,
     disableByLoginName,
+    list,
   };
 
