@@ -109,6 +109,35 @@ export const list = async (params = {}, options = {}) => {
 }
 
 
+export const updatePassw = async (loginName, userName, authType, role, department, others = {}, options = {}) => {
+  info(`更新用户密码(${loginName})`);
+  const token = await authenticate(options);
+  const host = RIS_HOST || options.host;
+
+  const user = {
+    loginName,
+    userName,
+    authType: {
+      id: authType
+    },
+    role: {
+      id: role
+    },
+    department: {
+      id: department
+    },
+    ...others,
+  };
+  const res = await ax.post(`${host}/shterm/api/user/`, user, {
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'st-auth-token': token,
+    },
+  });
+  return res.data;
+}
+
+
   
   export default {
     getById,
