@@ -1,9 +1,9 @@
 import axios from 'axios';
 import cache from 'memory-cache';
 import Debug from 'debug';
-const warn = Debug('ynu-libs:ris-auth:warn');
-const error = Debug('ynu-libs:ris-auth:error');
-const info = Debug('ynu-libs:ris-auth:info');
+const warn = Debug('qz-ris-api:auth:warn');
+const error = Debug('qz-ris-api:auth:error');
+const info = Debug('qz-ris-api:auth:info');
 
 const { RIS_HOST, RIS_USERNAME, RIS_PASSWORD } = process.env;
 
