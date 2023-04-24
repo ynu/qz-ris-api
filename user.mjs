@@ -8,6 +8,27 @@ const debug = Debug('ynu-libs:ris-auth:debug');
 
 const { RIS_HOST } = process.env;
 
+export const updatePwd = async (loginName, password, options = {}) => {
+  info(`根据用户 ID(${loginName}) 更新用户的密码`);
+  const token = await authenticate(options);
+  const host = RIS_HOST || options.host;
+  const {id} = await getByLoginName(loginName);
+  const passw = {
+    password,
+    authInfo:{
+      loginModifyPwd:true,
+      loginModifyPin:true
+    }
+  }
+
+  const res = await ax.put(`${host}/shterm/api/user/${id}`, passw,{
+    headers: {
+      'st-auth-token': token,
+    },
+  });
+  return res.data;
+}
+
 export const getById = async (id, options = {}) => {
     info(`根据用户 ID(${id}) 查询用户的信息`);
     const token = await authenticate(options);
@@ -111,6 +132,7 @@ export const list = async (params = {}, options = {}) => {
 
   
   export default {
+    updatePwd,
     getById,
     getByLoginName,
     create,
