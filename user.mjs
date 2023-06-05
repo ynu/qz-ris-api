@@ -168,6 +168,22 @@ export const resetuserstate = async (loginName, options = {}) =>{
   return res.data;
 }
 
+export const stopaccount = async (loginName, options = {}) =>{
+  info(`根据用户 ID(${loginName}) 停用用户`);
+  const token = await authenticate();
+  const host = RIS_HOST || options.host;
+  const {id} = await getByLoginName(loginName);
+  const rebindp = {
+    state: 3,
+  }
+  const res = await ax.put(`${host}/shterm/api/user/${id}`, rebindp,{
+    headers: {
+      'st-auth-token': token,
+    },
+  });
+  return res.data;
+}
+
   
 export default {
   updatePwd,
