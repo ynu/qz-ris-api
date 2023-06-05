@@ -149,6 +149,25 @@ export const rebindphonenumber = async (loginName, options = {}) =>{
   return res.data;
 }
 
+export const resetuserstate = async (loginName, options = {}) =>{
+  info(`根据用户 ID(${loginName}) 更新用户的状态`);
+  const token = await authenticate();
+  const host = RIS_HOST || options.host;
+  const {id} = await getByLoginName(loginName);
+  const rebindp = {
+    state: 0,
+    vaildFrom: options.vaildFrom,
+    vaildTo: options.vaildFrom,
+  }
+
+  const res = await ax.put(`${host}/shterm/api/user/${id}`, rebindp,{
+    headers: {
+      'st-auth-token': token,
+    },
+  });
+  return res.data;
+}
+
   
 export default {
   updatePwd,
