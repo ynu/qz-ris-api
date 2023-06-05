@@ -130,13 +130,32 @@ export const list = async (params = {}, options = {}) => {
 }
 
 
+export const rebindphonenumber = async (loginName, options = {}) =>{
+  info(`根据用户 ID(${loginName}) 重新绑定手机号`);
+  const token = await authenticate();
+  const host = RIS_HOST || options.host;
+  const {id} = await getByLoginName(loginName);
+  const rebindp = {
+    authInfo:{
+      loginModifyPin:true
+    }
+  }
+
+  const res = await ax.put(`${host}/shterm/api/user/${id}`, rebindp,{
+    headers: {
+      'st-auth-token': token,
+    },
+  });
+  return res.data;
+}
+
   
-  export default {
-    updatePwd,
-    getById,
-    getByLoginName,
-    create,
-    disableByLoginName,
-    list,
-  };
+export default {
+  updatePwd,
+  getById,
+  getByLoginName,
+  create,
+  disableByLoginName,
+  list,
+};
 
