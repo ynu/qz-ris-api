@@ -21,7 +21,7 @@ export const getByIP = async (ip, options = {}) => {
       'st-auth-token': token,
     },
   });
-  return res.data.content[0];
+  return res.data?.content[0];
 }
 
 /**
